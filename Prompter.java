@@ -8,13 +8,18 @@ public class Prompter{
   }
   
   /*
-      Method starts the game.
+      Method starts the game and checks if the game is solved.
    */
   public void play(){
-    while( mGame.getRemainingTries() > 0){
+    while( mGame.getRemainingTries() > 0 && !mGame.isSolved()){
       displayProgress();
       promptForGuess();
     
+    } 
+    if(mGame.isSolved()){
+          System.out.printf("Congratulations you won with %d tries remaining",  mGame.getRemainingTries() );
+    } else{
+         System.out.printf ("Bummer!! the correct word was %s. :( \n" , mGame.getAnswer());
     }
   }
   
@@ -29,9 +34,9 @@ public class Prompter{
     
     while(! isValidGuess){
       String guessAsString = console.readLine("Enter a letter: ");
-      char guess = guessAsString.charAt(0);
-        try{ 
-              isHit  = mGame.applyGuess(guess);
+      //char guess = guessAsString.charAt(0);
+        try{    
+             isHit  = mGame.applyGuess(guessAsString);
              isValidGuess = true;
         } catch(IllegalArgumentException ex){
           console.printf("%s.   Please try again.\n" , ex.getMessage() );
