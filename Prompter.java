@@ -7,6 +7,9 @@ public class Prompter{
     mGame = game; 
   }
   
+  /*
+      Method starts the game.
+   */
   public void play(){
     while( mGame.getRemainingTries() > 0){
       displayProgress();
@@ -15,12 +18,27 @@ public class Prompter{
     }
   }
   
-   
+   /*
+      prompts the user for to guess
+   */
   public boolean promptForGuess(){
     Console console = System.console();
-    String guessAsString = console.readLine("Enter a letter: ");
-    char guess = guessAsString.charAt(0);
-    return mGame.applyGuess(guess);
+    
+    boolean isHit = false;
+    boolean isValidGuess = false;
+    
+    while(! isValidGuess){
+      String guessAsString = console.readLine("Enter a letter: ");
+      char guess = guessAsString.charAt(0);
+        try{ 
+              isHit  = mGame.applyGuess(guess);
+             isValidGuess = true;
+        } catch(IllegalArgumentException ex){
+          console.printf("%s.   Please try again.\n" , ex.getMessage() );
+        }
+    }
+    
+     return isHit;
     }
   
   
