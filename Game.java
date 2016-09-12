@@ -41,9 +41,7 @@
         if(letters.length() == 0){
           throw new IllegalArgumentException("No letter found");
         }
-        
         return applyGuess(letters.charAt(0));
-        
       }
     
     
@@ -77,8 +75,8 @@
        String progress = " ";
          for(char letter: mAnswer.toCharArray()){
              char display = '-';
-             if(mHits.indexOf(letter) >= 0 ){
-              display = letter;
+              if(mHits.indexOf(letter) >= 0 ){
+                   display = letter;
               }
          progress += display;
        }
@@ -93,8 +91,8 @@
        
         **/
     public int getRemainingTries(){
-      return MAX_MISSES - mMisses.length(); 
-    }
+       return MAX_MISSES - mMisses.length(); 
+     }
     
     
     
@@ -103,8 +101,8 @@
          Method returns the correct of the game to the user.
     **/
     public String getAnswer(){
-      return mAnswer;
-    }
+       return mAnswer;
+     }
     
     
     /**
