@@ -1,19 +1,36 @@
-import java.io.console;
+import java.io.Console;
 
 public class Prompter{
+    private Game mGame;
   
-  private Game mGame; // is placed her so we can use the method from the Game class
-  
-  public Prompter(Game game)
+  public Prompter(Game game){
     mGame = game; 
+  }
+  
+  public void play(){
+    while( mGame.getRemainingTries() > 0){
+      displayProgress();
+      promptForGuess();
+    
+    }
+  }
+  
    
   public boolean promptForGuess(){
     Console console = System.console();
     String guessAsString = console.readLine("Enter a letter: ");
     char guess = guessAsString.charAt(0);
-    return applyGuess(guess); // calls the method applyGuess(letter) from the game class.
-   }
+    return mGame.applyGuess(guess);
+    }
   
   
-  
+    public void displayProgress(){
+    System.out.printf("You have %d tries left to solve:  %s\n", 
+                         mGame.getRemainingTries(), 
+                         mGame.getCurrentProgress() );
+    
+    }
 }
+  
+  
+  
